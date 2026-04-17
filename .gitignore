@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.*
+.env.local
+
+# Dependency Directories
+vendor/
+node_modules/
+
+# Logs & Debug
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Application Storage & Cache
+storage/
+public/storage/
+cache/
+tmp/
+
+# IDE & System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Temporary / Test Scripts
+test.php
+testproducts.php
+testsse.php
+*.tmp
+temp/
+
+# Already ignored
+config/constants.php
+ideas

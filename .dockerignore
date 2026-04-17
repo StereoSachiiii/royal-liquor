@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+tests
+phpunit.xml
+schema
+seed_data.sql
+seed_e2e.sql
+node_modules
+README.md
+ARCHITECTURE.md

@@ -1,0 +1,127 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Admin\API\Routes;
+
+use App\Core\Request;
+use App\Core\Session;
+use App\Admin\Controllers\OrderItemController;
+use App\Admin\Middleware\RateLimitMiddleware;
+use App\Admin\Middleware\AuthMiddleware;
+use App\Admin\Middleware\CsrfMiddleware;
+use App\Core\Router;
+
+/** @var Router $router */
+
+// Guard against direct access - must be loaded via router
+if (!isset($router) || !$router instanceof Router) {
+    header('Content-Type: application/json');
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Direct access not allowed.']);
+    exit;
+}
+
+$router->group('/api/v1', function (Router $router): void {
+    // GET /api/v1/order-items (with optional filters)
+    $router->get('/order-items', function (Request $request): array {
+        $controller = $GLOBALS['container']->get(OrderItemController::class);
+
+        $id       = $request->getQuery('id');
+        $orderId  = $request->getQuery('order_id');
+        $count    = $request->getQuery('count');
+
+        if ($id !== null) {
+            $id = (int)$id;
+            if ($id <= 0) {
+                return [
+                    'success' => false,
+                    'message' => 'Order item ID required',
+                    'code'    => 400,
+                ];
+            }
+            return $controller->getById($id);
+        }
+
+        if ($orderId !== null) {
+            $orderId = (int)$orderId;
+            return $controller->getByOrder($orderId);
+        }
+
+        if ($count === 'true') {
+            AuthMiddleware::requireAdmin();
+            return $controller->count();
+        }
+
+        AuthMiddleware::requireAdmin();
+        $limit  = (int)$request->getQuery('limit', 50);
+        $offset = (int)$request->getQuery('offset', 0);
+        return $controller->getAll($limit, $offset);
+    });
+
+    // GET /api/v1/order-items/:id
+    $router->get('/order-items/:id', function (Request $request, array $params): array {
+        $controller = $GLOBALS['container']->get(OrderItemController::class);
+        $id = (int)($params['id'] ?? 0);
+        
+        if ($id <= 0) {
+            return [
+                'success' => false,
+                'message' => 'Order item ID required',
+                'code'    => 400,
+            ];
+        }
+        return $controller->getById($id);
+    });
+
+    // POST /api/v1/order-items
+    $router->post('/order-items', function (Request $request): array {
+        AuthMiddleware::requireAdmin();
+        CsrfMiddleware::verifyCsrf();
+        RateLimitMiddleware::check('order_item_create', 20, 60);
+
+        $controller = $GLOBALS['container']->get(OrderItemController::class);
+        $body       = $request->getAllBody();
+        return $controller->create($body);
+    });
+
+    // PUT /api/v1/order-items/:id
+    $router->put('/order-items/:id', function (Request $request, array $params): array {
+        AuthMiddleware::requireAdmin();
+        CsrfMiddleware::verifyCsrf();
+        RateLimitMiddleware::check('order_item_update', 20, 60);
+
+        $controller = $GLOBALS['container']->get(OrderItemController::class);
+        $body       = $request->getAllBody();
+        $id         = (int)($params['id'] ?? ($body['id'] ?? 0));
+
+        if ($id <= 0) {
+            return [
+                'success' => false,
+                'message' => 'Order item ID required',
+                'code'    => 400,
+            ];
+        }
+
+        return $controller->update($id, $body);
+    });
+
+    // DELETE /api/v1/order-items/:id
+    $router->delete('/order-items/:id', function (Request $request, array $params): array {
+        AuthMiddleware::requireAdmin();
+        CsrfMiddleware::verifyCsrf();
+        RateLimitMiddleware::check('order_item_delete', 10, 60);
+
+        $controller = $GLOBALS['container']->get(OrderItemController::class);
+        $id         = (int)($params['id'] ?? 0);
+
+        if ($id <= 0) {
+            return [
+                'success' => false,
+                'message' => 'Order item ID required',
+                'code'    => 400,
+            ];
+        }
+
+        return $controller->delete($id);
+    });
+});

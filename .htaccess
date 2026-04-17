@@ -1,0 +1,11 @@
+# Enable rewriting
+RewriteEngine On
+
+# 1. Route all /api/v1/* requests to the modern unified API gateway
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/v1/(.*)$ public/api/v1/index.php [L,QSA]
+
+# 2. Add trailing slash to /public and /admin if missing (for directory indexing)
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(admin|public)$ $1/ [R=301,L]

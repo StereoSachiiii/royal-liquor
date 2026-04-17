@@ -1,0 +1,291 @@
+/**
+ * Royal Liquor Design System
+ * Unified CSS Variables for Premium Black/White/Gold Aesthetic
+ * 
+ * This file MUST be loaded FIRST before all other CSS files.
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   CSS RESET & BOX SIZING
+   ═══════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════ */
+:root {
+    /* ─── Typography ─── */
+    --font-primary: 'Georgia', serif;
+    --font-secondary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* ─── Colors: Core Palette (Monochrome Transition) ─── */
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-gold: #000000; /* Monochrome: Gold is now Black */
+    --color-gold-hover: #333333;
+    --color-gold-light: rgba(0, 0, 0, 0.05);
+
+    /* ─── Aliases for compatibility ─── */
+    --black: var(--color-black);
+    --white: var(--color-white);
+    --gold: var(--color-gold);
+
+    /* ─── Colors: Grays ─── */
+    --color-gray-50: #fafafa;
+    --color-gray-100: #f5f5f5;
+    --color-gray-200: #eeeeee;
+    --color-gray-300: #d1d1d1;
+    --color-gray-400: #999999;
+    --color-gray-500: #717171;
+    --color-gray-600: #555555;
+    --color-gray-700: #333333;
+    --color-gray-800: #1a1a1a;
+    --color-gray-900: #0a0a0a;
+
+    /* ─── Colors: Semantic ─── */
+    --color-success: #2e7d32;
+    --color-warning: #f57c00;
+    --color-error: #c62828;
+    --color-info: #1565c0;
+
+    /* ─── Spacing Scale ─── */
+    --space-xs: 0.25rem;
+    /* 4px */
+    --space-sm: 0.5rem;
+    /* 8px */
+    --space-md: 1rem;
+    /* 16px */
+    --space-lg: 1.5rem;
+    /* 24px */
+    --space-xl: 2rem;
+    /* 32px */
+    --space-2xl: 3rem;
+    /* 48px */
+    --space-3xl: 4rem;
+    /* 64px */
+
+    /* ─── Border Radius ─── */
+    --radius-none: 0;
+    --radius-sm: 2px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-full: 9999px;
+
+    /* ─── Shadows ─── */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --shadow-gold: 0 4px 12px rgba(212, 175, 55, 0.15);
+
+    /* ─── Transitions ─── */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ─── Z-Index Scale ─── */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal-backdrop: 500;
+    --z-modal: 1000;
+    --z-toast: 2000;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════ */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-gray-900);
+    background-color: var(--color-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT CONTAINERS
+   ═══════════════════════════════════════════════════════════ */
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.section {
+    padding: 100px 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-gold);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY: BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.btn-primary {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border-color: var(--color-black);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-black);
+}
+
+.btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-black);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.btn-gold {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    border-color: var(--color-gold);
+}
+
+.btn-gold:hover {
+    background-color: var(--color-gold-hover);
+    border-color: var(--color-gold-hover);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY: TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════ */
+.text-gold {
+    color: var(--color-gold);
+}
+
+.text-muted {
+    color: var(--color-gray-600);
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY: SECTION TITLE (Standardized)
+   ═══════════════════════════════════════════════════════════ */
+.section-title {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    color: var(--color-gray-900);
+    margin: var(--space-xl) 0;
+    letter-spacing: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   UTILITY: HIDDEN
+   ═══════════════════════════════════════════════════════════ */
+.hidden {
+    display: none !important;
+}
+/* --- Centered Modal System --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    z-index: 1001;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+/* --- Sidebar States --- */
+#sidebarOverlay.active { opacity: 1 !important; visibility: visible !important; }
+aside.active { transform: translateX(0) !important; }
+.cart-expand.active { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; }

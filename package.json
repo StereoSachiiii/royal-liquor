@@ -1,0 +1,22 @@
+{
+  "name": "royal-liquor",
+  "version": "1.0.0",
+  "description": "An **OKAY-grade e-commerce application** built strictly with **Vanilla PHP** and **Pure JavaScript** — demonstrating mastery of web fundamentals through custom-built architecture.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./public/css/royal.css -o ./public/css/main.css --minify",
+    "dev:css": "npx tailwindcss -i ./public/css/royal.css -o ./public/css/main.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^3.4.19"
+  }
+}
