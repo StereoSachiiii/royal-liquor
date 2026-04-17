@@ -86,9 +86,9 @@ $initialFeedback = $feedbackRepo->getAllPaginated(12, 0, true);
                 <?php else: ?>
                 <div class="p-12 bg-gray-50 border border-gray-100 flex flex-col items-center text-center">
                     <svg class="w-12 h-12 text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                    <p class="text-xs uppercase font-black tracking-widest text-black mb-8">Authentication Required</p>
-                    <p class="text-[10px] text-gray-400 tracking-widest leading-loose mb-10">Only members of the Royal Liquor directory can submit product evaluations.</p>
-                    <a href="auth.php" class="btn-premium px-12">Identify Yourself</a>
+                    <p class="text-xs uppercase font-black tracking-widest text-black mb-8">Members Only</p>
+                    <p class="text-[10px] text-gray-400 tracking-widest leading-loose mb-10">Sign in to share your refined perspective with the Royal Liquor community.</p>
+                    <a href="auth.php" class="btn-premium px-12">Sign In</a>
                 </div>
                 <?php endif; ?>
             </div>

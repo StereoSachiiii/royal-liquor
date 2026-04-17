@@ -14,9 +14,6 @@ require_once __DIR__ . "/../config/urls.php";
 </section>
 
 <!-- Category Detail Modal -->
-</section>
-
-<!-- Category Detail Modal -->
 <div class="fixed inset-0 flex items-center justify-center z-[9999] opacity-0 invisible transition-all duration-500 bg-black/90 backdrop-blur-sm p-4 md:p-12" id="detailModalCategory">
     <div class="bg-white w-full max-w-[1000px] h-auto max-h-[90vh] flex flex-col md:flex-row relative shadow-[0_0_50px_rgba(0,0,0,0.5)] scale-95 transition-transform duration-500 overflow-hidden" id="detailModalCategoryContent">
         <button class="absolute top-4 right-4 p-2 bg-black text-white hover:bg-gray-800 z-[100] transition-colors" id="closeModalCategory">
@@ -107,15 +104,23 @@ require_once __DIR__ . "/../config/urls.php";
         `;
     };
 
-    document.addEventListener('DOMContentLoaded', async () => {
+    const initCategories = async () => {
         const container = document.querySelector('.categories-container');
+        if (!container) return;
+
         categoriesData = await fetchCategories();
         if (categoriesData.length === 0) {
             container.innerHTML = '<div class="col-span-full py-32 text-center uppercase tracking-widest text-gray-400 font-bold">No collections found.</div>';
             return;
         }
         container.innerHTML = categoriesData.map(renderCard).join('');
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCategories);
+    } else {
+        initCategories();
+    }
 
     document.addEventListener('click', async (e) => {
         const modal = document.getElementById('detailModalCategory');
@@ -131,7 +136,7 @@ require_once __DIR__ . "/../config/urls.php";
             document.body.style.overflow = 'hidden';
 
             body.innerHTML = '<div class="w-full p-20 text-center uppercase tracking-widest text-[10px] font-black animate-pulse">Loading Collection...</div>';
-            const cat = categoriesData.find(c => c.id === parseInt(btn.dataset.id));
+            const cat = categoriesData.find(c => c.id == btn.dataset.id);
             setTimeout(() => { body.innerHTML = renderDetail(cat); }, 400);
         }
 

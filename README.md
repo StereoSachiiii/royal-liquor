@@ -7,15 +7,41 @@ For the full technical breakdown, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
+## Key Features
+
+- **Custom-Built MVC Engine**: Modern PHP architecture implemented from scratch without external frameworks.
+- **Automated Dependency Injection**: Reflection-based DI container for automatic class wiring.
+- **Multi-Warehouse Stock Engine**: Robust FIFO inventory management with row-level locking.
+- **Admin SPA Dashboard**: A high-performance, framework-less Single Page Application for management.
+- **Advanced Security**: Integrated CSRF protection, session-based rate limiting, and SQL injection prevention.
+- **PostgreSQL Optimized**: Using complex views and efficient indexing for high-performance data retrieval.
+
+---
+
 ## Interface Preview
 
-| Home Page | Cart Page |
-| :---: | :---: |
-| ![Homepage](public/assets/images/screenshots/homepage.png) | ![Cart](public/assets/images/screenshots/cart.png) |
+This section showcases the premium monochrome UI and key features of the platform.
 
-| Admin Login |
-| :---: |
-| ![Admin](public/assets/images/screenshots/admin_login.png) |
+### 1. Landing Page
+The hero section focuses on elegance and high-end aesthetics.
+![Landing Page Hero](preview/image.png)
+
+### 2. Product Selection
+A clean, structured grid for browsing our curated collection.
+![Product Grid](preview/image-1.png)
+
+### 3. Product Details
+Comprehensive view of individual products including tasting notes and reviews.
+![Product Detail](preview/image-2.png)
+
+### 4. UI Components
+Additional views of the modernized interface elements.
+![UI View](preview/image-copy.png)
+![UI View](preview/image-copy-2.png)
+![UI View](preview/image-copy-3.png)
+![UI View](preview/image-copy-4.png)
+![UI View](preview/image-copy-5.png)
+![UI View](preview/image-copy-6.png)
 
 ---
 

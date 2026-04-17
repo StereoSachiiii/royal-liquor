@@ -53,12 +53,12 @@ require_once __DIR__ . "/components/header.php";
                 <div class="space-y-6">
                     <div class="flex justify-between items-center">
                         <h3 class="text-[10px] uppercase tracking-widest font-black text-gray-400">Price Ceiling</h3>
-                        <span id="maxPriceLabel" class="text-xs font-bold font-heading text-black">Rs. 500+</span>
+                        <span id="maxPriceLabel" class="text-xs font-bold font-heading text-black">Rs. 50,000+</span>
                     </div>
-                    <input type="range" id="priceSlider" min="0" max="500" value="500" class="w-full h-1.5 bg-gray-100 appearance-none cursor-pointer accent-black">
+                    <input type="range" id="priceSlider" min="0" max="50000" step="500" value="50000" class="w-full h-1.5 bg-gray-100 appearance-none cursor-pointer accent-black">
                     <div class="flex justify-between text-[9px] uppercase tracking-widest text-gray-300 font-bold">
                         <span>Rs. 0</span>
-                        <span>Rs. 500+</span>
+                        <span>Rs. 50,000+</span>
                     </div>
                 </div>
 
@@ -292,7 +292,8 @@ const setupEventListeners = () => {
 
     document.getElementById('priceSlider').addEventListener('input', (e) => {
         filters.maxPrice = parseInt(e.target.value);
-        document.getElementById('maxPriceLabel').textContent = `Rs. ${e.target.value}${e.target.value == 500 ? '+' : ''}`;
+        const displayValue = parseInt(e.target.value).toLocaleString();
+        document.getElementById('maxPriceLabel').textContent = `Rs. ${displayValue}${e.target.value == 50000 ? '+' : ''}`;
         applyFilters();
     });
 
@@ -330,8 +331,8 @@ const clearFilters = () => {
     filters.searchQuery = '';
     
     document.querySelectorAll('input[name="category"]')[0].checked = true;
-    document.getElementById('priceSlider').value = 500;
-    document.getElementById('maxPriceLabel').textContent = 'Rs. 500+';
+    document.getElementById('priceSlider').value = 50000;
+    document.getElementById('maxPriceLabel').textContent = 'Rs. 50,000+';
     document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = r.value === '0');
     document.getElementById('inStockOnly').checked = false;
     document.getElementById('premiumOnly').checked = false;

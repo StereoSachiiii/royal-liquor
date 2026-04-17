@@ -62,8 +62,8 @@ class AIRecommendationService
     private function getGenericRecommendations(int $limit): array
     {
         // Simple fallback: Get the newest or randomly shuffled distinct products
-        $products = $this->productRepository->shopAllEnriched([], $limit, 0);
-        return $products;
+        // Correcting method signature: Passing $limit as the first argument
+        return $this->productRepository->shopAllEnriched($limit, 0);
     }
 
     private function buildUserContext(int $userId): array

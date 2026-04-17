@@ -103,7 +103,7 @@ export async function apiRequest(endpoint, options = {}) {
         const data = await response.json();
 
         if (!data.success && data.message) {
-            throw new Error(data.message);
+            throw data;
         }
 
         return data;

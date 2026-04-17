@@ -25,26 +25,23 @@ $csrfToken = $session->getCsrfInstance()->getToken();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..1000;1,14..32,100..1000&display=swap" rel="stylesheet">
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/main.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: '#D4AF37',
-                        'gold-hover': '#C49B28'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['DM Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
     <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-hover: #C49B28;
+        }
+        .text-gold { color: var(--gold); }
+        .bg-gold { background-color: var(--gold); }
+        .hover\:text-gold:hover { color: var(--gold); }
+        .hover\:bg-gold:hover { background-color: var(--gold); }
+        .border-gold { border-color: var(--gold); }
+        .focus\:border-gold:focus { border-color: var(--gold); }
+        .ring-gold\/20 { --tw-ring-color: rgba(212, 175, 55, 0.2); }
+        .bg-gold\/5 { background-color: rgba(212, 175, 55, 0.05); }
+        .border-gold\/20 { border-color: rgba(212, 175, 55, 0.2); }
+        .selection\:bg-gold *::selection { background-color: var(--gold); }
+        .selection\:bg-gold ::selection { background-color: var(--gold); }
         .auth-transition {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -294,9 +291,15 @@ $csrfToken = $session->getCsrfInstance()->getToken();
                     submitBtn.innerText = formId === 'loginForm' ? 'Establish Connection' : 'Apply for Membership';
                     
                     if (error.errors) {
+                        messageDiv.className = 'mb-8 p-4 text-[10px] uppercase font-black tracking-widest border border-red-500 bg-red-50 text-red-700';
+                        messageDiv.innerText = 'Please correct the errors below.';
+                        messageDiv.classList.remove('hidden');
+
                         Object.entries(error.errors).forEach(([key, msg]) => {
                             const errorEl = document.getElementById(`${(formId.startsWith('login') ? 'login' : '') + key}-error`);
-                            if (errorEl) errorEl.innerText = msg;
+                            if (errorEl) {
+                                errorEl.innerText = Array.isArray(msg) ? msg[0] : msg;
+                            }
                         });
                     } else {
                         messageDiv.className = 'mb-8 p-4 text-[10px] uppercase font-black tracking-widest border border-red-500 bg-red-50 text-red-700';
