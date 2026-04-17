@@ -1,11 +1,11 @@
 <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
-    <a href="./myaccount/wishlist" class="wishlist-icon w-14 h-14 bg-white border border-gray-100 shadow-2xl flex items-center justify-center group hover:scale-110 transition-all duration-300 relative">
+    <a href="<?= BASE_URL ?>myaccount/wishlist.php" class="wishlist-icon w-14 h-14 bg-white border border-gray-100 shadow-2xl flex items-center justify-center group hover:scale-110 transition-all duration-300 relative">
         <svg class="w-6 h-6 text-black group-hover:text-gold transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
         </svg>
     </a>
     
-    <a href="./cart.php" class="cart-icon w-14 h-14 bg-black shadow-2xl flex items-center justify-center group hover:scale-110 transition-all duration-300 relative">
+    <a href="<?= BASE_URL ?>cart.php" class="cart-icon w-14 h-14 bg-black shadow-2xl flex items-center justify-center group hover:scale-110 transition-all duration-300 relative">
         <svg class="w-6 h-6 text-white group-hover:text-gold transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>

@@ -49,34 +49,39 @@ function renderWishlist() {
     if (wishlist.length === 0) return;
     
     container.innerHTML = wishlist.map(item => `
-        <div class="bg-white border border-gray-100 group transition-all duration-500 hover:border-gold hover:shadow-2xl relative" data-id="${item.id}">
+        <div class="bg-white border border-gray-100 group transition-all duration-500 hover:border-black relative flex flex-col overflow-hidden" data-id="${item.id}">
             <!-- Visual -->
-            <div class="aspect-[4/5] bg-[#fafafa] p-10 flex items-center justify-center overflow-hidden relative">
-                <img src="${fixImagePath(item.image_url)}" alt="${item.name}" class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-110">
+            <div class="aspect-[4/5] bg-gray-50 flex items-center justify-center relative">
+                <img src="${fixImagePath(item.image_url)}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0">
                 
                 <!-- Quick Removal -->
-                <button class="remove-btn absolute top-6 right-6 w-10 h-10 bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-red-500 hover:border-red-500 transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0" data-id="${item.id}">
+                <button class="remove-btn absolute top-4 right-4 w-8 h-8 bg-white border border-gray-100 flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition-all duration-300 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 z-20" data-id="${item.id}" title="Remove from Wishlist">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
-            </div>
 
-            <!-- Meta -->
-            <div class="p-8 text-center bg-white border-t border-gray-50">
-                <span class="text-[9px] uppercase font-black tracking-[0.4em] text-gold mb-2 block italic">${item.category_name || 'Spirit'}</span>
-                <h3 class="text-sm font-black uppercase tracking-widest mb-4 truncate">${item.name}</h3>
-                <div class="flex items-center justify-center gap-6">
-                    <span class="text-lg font-black tracking-tighter">$${(item.price_cents / 100).toFixed(2)}</span>
-                    <a href="<?= BASE_URL ?>product.php?id=${item.id}" class="text-[9px] uppercase font-black tracking-widest text-gray-300 hover:text-black transition-colors border-b border-gray-100 pb-1">View Entry</a>
+                <!-- Hover Add to Cart Layer -->
+                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10 hidden md:block">
+                    <button class="add-to-cart w-full bg-black text-white py-4 text-[10px] font-black uppercase tracking-widest hover:bg-gold transition-colors flex items-center justify-center gap-2 block">
+                        Add to Cart <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- Action Area -->
-            <div class="p-6 border-t border-gray-50 flex items-center justify-center">
-                <button class="add-to-cart w-full h-12 flex items-center justify-center gap-3 text-[10px] uppercase font-black tracking-widest hover:bg-black hover:text-white transition-all duration-500 group-active:scale-95">
-                    Add to Cart
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </button>
+            <!-- Meta -->
+            <div class="p-6 text-center flex flex-col flex-grow items-center justify-end bg-white relative z-20">
+                <span class="text-[9px] uppercase font-black tracking-[0.3em] text-gray-400 mb-2 truncate max-w-full block">
+                    ${item.category_name || 'Spirit'}
+                </span>
+                <a href="<?= BASE_URL ?>product.php?id=${item.id}" class="text-sm font-heading uppercase tracking-widest mb-4 group-hover:text-gold transition-colors line-clamp-2 px-2 hover:underline">
+                    ${item.name}
+                </a>
+                <span class="text-xs font-black tracking-widest mt-auto uppercase">Rs. ${(item.price_cents / 100).toFixed(2)}</span>
             </div>
+
+            <!-- Mobile Add to Cart (Only visible on small screens) -->
+            <button class="add-to-cart md:hidden w-full bg-black text-white py-4 text-[10px] font-black uppercase tracking-widest hover:bg-gold transition-colors flex items-center justify-center gap-2">
+                Add to Cart
+            </button>
         </div>
     `).join('');
 
